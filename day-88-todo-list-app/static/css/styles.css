@@ -1,0 +1,93 @@
+/* Site-wide */
+body {
+    background-color: #333;
+    color: white;
+    display: flex;
+    min-height: 50vh;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input[type="checkbox"] {
+  transform:scale(2.8, 2.8);
+  margin-right: 30px;
+  margin-top: 0;
+}
+
+.checkboxes label {
+  display: inline-block;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+.checkboxes input {
+  vertical-align: middle;
+}
+.checkboxes label span {
+  vertical-align: middle;
+}
+
+/* Homepage */
+.page-title {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+.btn-light {
+    background-color: #D3D3D3;
+    color: black;
+}
+
+.text-right {
+    position: relative;
+}
+
+/* Homepage task list */
+.task-list label {
+  float: left;
+}
+.task-list ul {
+  margin: 0;
+  list-style: none;
+  float: left;
+}
+#checkboxes label {
+  float: left;
+}
+#checkboxes ul {
+  margin: 0;
+  list-style: none;
+  float: left;
+}
+
+.completed-True {
+    text-decoration: line-through;
+}
+
+.completed-False {
+    text-decoration: none;
+}
+
+.add-new-btn {
+    position: absolute;
+    bottom: 50px;
+    right: 100px;
+    margin-top: 25px;
+}
+
+/* Add/Edit Task form */
+#new-category {
+    display: none;
+}
+
+.submit-btn {
+    margin-top: 15px;
+}
+
+/* Task detailed view page */
+.task-row {
+    margin-bottom: 30px;
+}
+
+.nav-button {
+    margin-bottom: 25px;
+}

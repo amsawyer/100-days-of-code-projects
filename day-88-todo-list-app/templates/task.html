@@ -1,0 +1,85 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Task {{ task.name }}{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/styles.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+
+    <div class="row page-title">
+        <div class="col-sm-12 col-md-8">
+              <div class="checkboxes"><h1 class="display-4">
+                {% if task.completed %}
+                    <input type="checkbox" onchange="strikethroughOnCheck({{ task.id }})" id="task_{{ task.id }}_checkbox" checked="true">
+                {% else %}
+                    <input type="checkbox" onchange="strikethroughOnCheck({{ task.id }})" id="task_{{ task.id }}_checkbox">
+                {% endif %}
+                <span id="task_{{ task.id }}" class="completed-{{ task.completed }} task-name">{{ task.name }}</span>
+            </h1></div>
+        </div>
+    </div>
+    <div class="row task-row">
+        {% if task.due_date %}
+        <div class="col-sm-3">
+                <p>Due on {{ task.due_date }}</p>
+        </div>
+        {% endif %}
+        {% if task.owner %}
+        <div class="col-sm-3">
+            <p>Owned by {{ task.owner }}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% if task.descr %}
+    <div class="row task-row">
+        <div class="col-sm-12">
+            <p><em>{{ task.descr }}</em></p>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row task-row">
+        <div class="col-sm-3">
+            <p>Created {{ task.created_date }}</p>
+        </div>
+        {% if task.category %}
+        <div class="col-sm-3">
+            <p>Category: {{ task.category.category_name }}</p>
+        </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <!-- Row of nav/edit buttons -->
+        <div class="col-sm-4 col-md-2 nav-button col-md-offset-6">
+            <a class="btn btn-light btn-block" href="{{ url_for('home') }}" role="button">Return to Home</a>
+        </div>
+        <div class="col-sm-4 col-md-2 nav-button">
+            <a class="btn btn-warning btn-block" href="{{ url_for('edit_task', task_id=task.id) }}" role="button">Edit Task</a>
+        </div>
+        <div class="col-sm-4 col-md-2 nav-button">
+            <a class="btn btn-danger btn-block" href="{{ url_for('delete_task', task_id=task.id) }}" role="button">Delete Task</a>
+        </div>
+    </div>
+</div>
+
+<!-- Function to strikethrough task name text when task is marked as completed -->
+<script>
+    function strikethroughOnCheck(task_id) {
+      var taskLine = document.getElementById('task_' + task_id);
+      var checkBox = document.getElementById('task_' + task_id + '_checkbox');
+      if (checkBox.checked == true) {
+        taskLine.style.textDecoration = "line-through";
+      } else {
+      } else {
+        taskLine.style.textDecoration = "none";
+      }
+      $.getJSON('/task_complete/' + task_id);
+    }
+</script>
+
+{% endblock %}

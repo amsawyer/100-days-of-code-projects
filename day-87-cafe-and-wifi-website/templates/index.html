@@ -1,0 +1,44 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Coffee and WiFi{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/styles.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron text-center">
+    <div class="container">
+        <div class="row">
+          <h1 class="display-4">☕️ Coffee & Wifi Finder 💻</h1>
+          <h3>Find a great coffee shop to work in.</h3>
+          <hr class="my-4">
+          <p>Browse coffee shops with data on coffee price, WiFi and power socket availability, and location.</p>
+        </div>
+
+        <!-- Buttons that link to other pages -->
+
+        <div class="row homebuttons">
+          <div class="col-md-4">
+              <a class="btn btn-primary btn-lg" href="{{ url_for('random_cafe') }}" role="button">I'm Feeling Lucky</a>
+          </div>
+          <div class="col-md-4">
+              <a class="btn btn-success btn-lg" href="{{ url_for('cafes') }}" role="button">Show All</a>
+          </div>
+          <div class="col-md-4">
+              {{ wtf.quick_form(search_form, novalidate=True, button_map={'submit': 'warning'}) }}
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Add new cafe button -->
+    <div class="col-md-12 bg-light text-right">
+        <a class="btn btn-light add-new-btn" href="{{ url_for('add_cafe') }}" role="button">+ Add New Cafe</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Coffee Shops{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/styles.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container cafes-table">
+  <div class="row cafes-page-hdr">
+      <div class="col-md-6 col-sm-12">
+        <h1>All Cafes</h1>
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <div class="searchbar-form pull-right">
+            {{ wtf.quick_form(search_form, form_type="inline", novalidate=True, button_map={'submit': 'warning'}) }}
+        </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+        <!-- No cafes matched the search -->
+        {% if cafes|length == 0 %}
+            <p>No coffee shops in that location! Please try a different location.</p>
+        <!-- else (there are cafes to display) -->
+        {% else %}
+          <table class="table">
+              <thead>
+                <tr>
+                    {% for col_header in cols.values() %}
+                        <th scope="col">{{ col_header }}</th>
+                    {% endfor %}
+                </tr>
+              </thead>
+              <tbody>
+                  {% for cafe in cafes %}
+                    <tr>
+                        {% for key in cols.keys() %}
+                            {% if key == "map_url" %}
+                                <td><a href={{ cafe[key] }}>Maps Link</a></td>
+                            {% elif key == "img_url" %}
+                                <td><img class="cafe-img" src={{ cafe[key] }}></td>
+                            {% elif key == "coffee_price" %}
+                                <td>{{ cafe[key] }}
+                                    <p><a href="#" onclick="toggleShowUpdateForm('update-form_{{ cafe.id }}')">Update</a></p>
+
+                                    <div id="update-form_{{ cafe.id }}" style="display: none;">
+                                        <form class="form inline" method="post" role="form" novalidate="True">
+                                            {{ update_form.csrf_token() }}
+                                            {{ update_form.new_price() }}
+                                            {{ update_form.cafe_id(value=cafe.id) }}
+                                            {{ update_form.submit(class_="btn btn-warning") }}
+                                        </form>
+                                        <!--<p>{{ wtf.quick_form(update_form, form_type="inline", novalidate=True, button_map={'submit': 'warning'}) }}</p>-->
+                                    </div>
+                                </td>
+                            {% else %}
+                                <td>{{ cafe[key] }}</td>
+                            {% endif %}
+                        {% endfor %}
+                        <td><a href={{ url_for('delete_cafe', cafe_id=cafe.id) }}>❌</a></td>
+                    </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+        {% endif %}
+
+      <p><a class="btn btn-primary home-btn" href="{{ url_for('home') }}" role="button">Return to Home</a>
+
+    </div>
+  </div>
+</div>
+<div class="row">
+    <!-- Add new cafe button -->
+    <div class="col-md-12 bg-light text-right">
+        <a class="btn btn-light add-new-btn" href="{{ url_for('add_cafe') }}" role="button">+ Add New Cafe</a>
+    </div>
+</div>
+
+<script>
+    function toggleShowUpdateForm(div_id) {
+      var update_form = document.getElementById(div_id);
+      update_form.style.display = "inline";
+    }
+</script>
+
+{% endblock %}

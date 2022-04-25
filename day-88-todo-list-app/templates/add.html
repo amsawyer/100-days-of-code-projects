@@ -1,0 +1,52 @@
+{% extends 'bootstrap/base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
+
+{% block title %}Add a New Task{% endblock %}
+
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{url_for('.static', filename='css/styles.css')}}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row page-title">
+        <div class="col-sm-12 col-md-8">
+            {% if is_edit %}
+                <h1 class="display-4">Edit Task '{{ task_name }}'</h1>
+            {% else %}
+                <h1 class="display-4">Add a New TODO</h1>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 col-md-8">
+            <!-- Add New Task WTForm -->
+            <form class="form" method="post" role="form" novalidate="True">
+                {{ form.csrf_token() }}
+                {% for field in form %}
+                    {% if field.id == 'new_category_name' %}
+                        <div id="new-category">{{ wtf.form_field(field) }}</div>
+                    {% elif field.id != 'csrf_token' and field.id != 'submit' %}
+                        {{ wtf.form_field(field) }}
+                    {% endif %}
+                {% endfor %}
+                {{ form.submit(class_="btn btn-primary submit-btn") }}
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Function to dynamically display "New Category Name" input if the user is adding a new category -->
+<script>
+    function test(input) {
+      var newCategoryInput = document.getElementById('new-category');
+      if (input.value == "Add New") {
+        newCategoryInput.style.display = "inline";
+      } else {
+        newCategoryInput.style.display = "none";
+      }
+    }
+</script>
+
+{% endblock %}

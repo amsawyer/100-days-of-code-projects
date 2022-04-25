@@ -1,0 +1,67 @@
+/* This CSS file will need to be added to the styling of 
+your web pages for the styles to be rendered. */
+
+/* Site-wide */
+body {
+    background-color: #333;
+    color: white;
+}
+
+a {
+    color: #ffc107;
+}
+
+/* Homepage */
+.jumbotron {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  height: 100vh;
+  color: white;
+  background-color: #333;
+}
+
+.space-above {
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+/* Buttons */
+.btn {
+    margin: 15px 0 15px 0;
+}
+
+.homebuttons {
+    margin-top: 50px;
+}
+
+.btn-light {
+    background-color: #D3D3D3;
+    color: black;
+}
+
+.home-btn {
+    position: fixed;
+    bottom: 20px;
+    left: 100px;
+}
+
+.add-new-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 100px;
+}
+
+/* Cafes page */
+.cafes-page-hdr {
+    margin-top: 50px;
+}
+
+.cafe-img {
+    max-width: 50%;
+    height: auto;
+}
+
+.cafes-table {
+    margin-bottom: 75px;
+}
