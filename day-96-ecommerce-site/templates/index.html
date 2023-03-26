@@ -1,0 +1,36 @@
+{% include "header.html" %}
+
+    {% block content %}
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>The Bookshop</h1>
+            <span class="subheading">Happy reading!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    {% for item_row in items | batch(4) %}
+    <div class="row">
+      {% for item in item_row %}
+      <div class="col-md-3">
+        <a href="{{ url_for('display_item', item_id=item.id) }}">
+        <img class="book-img" src="{{ item.img_url }}">
+        <p>{{ item.name }}</p>
+        </a>
+      </div>
+      {% endfor %}
+    </div>
+    {% endfor %}
+  </div>
+    {% endblock %}
+
+{% include "footer.html" %}

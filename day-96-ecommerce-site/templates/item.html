@@ -1,0 +1,24 @@
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="row justify-content-center item-page-book">
+        <div class="col-lg-6 col-md-8 align-self-center">
+          <img src="{{ item.img_url }}" class="item-page-book-img">
+          <div class="item-heading">
+            <h2>{{ item.name }}</h2>
+            <h4>${{ item.price }}</h4>
+            <span class="meta">Category: {{ item.category }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 offset-4">
+          <a class="btn btn-primary add-to-cart-btn d-block" href="{{ url_for('add_to_cart', item_id=item.id) }}" role="button">Add to Cart</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+{% include "footer.html" %}

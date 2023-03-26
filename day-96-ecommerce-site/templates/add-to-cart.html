@@ -1,0 +1,32 @@
+{% include "header.html" %}
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1521587760476-6c12a4b040da?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1000&q=80')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row justify-content-center item-page-book">
+        <div class="col-lg-6 col-md-8 offset-lg-3 offset-md-2 align-self-center">
+          <div class="item-heading">
+            <h1>Add to Cart</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-6"><p>{{ cart_item.name }}</p></div>
+      <div class="col-6"><p>${{ cart_item.price }}</p></div>
+    </div>
+    <div class="row button-row justify-content-center">
+      <div class="col-sm-3">
+        <a class="btn btn-outline-dark btn-lg d-block" href="{{ url_for('login', item_id=cart_item.id) }}" role="button">Sign In</a>
+      </div>
+      <div class="col-sm-3">
+        <a class="btn btn-primary btn-lg d-block" href="{{ url_for('register', item_id=cart_item.id) }}" role="button">Register</a>
+      </div>
+    </div>
+  </div>
+
+{% include "footer.html" %}

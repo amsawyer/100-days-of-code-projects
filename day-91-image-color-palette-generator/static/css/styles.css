@@ -1,0 +1,24 @@
+/* Homepage */
+.homepage-body {
+    padding: 150px 50px 150px 50px;
+}
+
+.upload-form {
+    margin-top: 50px;
+    display: inline;
+}
+
+/* Image color palette page */
+.img-page-body {
+    padding: 50px;
+}
+
+.uploaded-img {
+    max-width: 50%;
+    margin-bottom: 50px;
+}
+
+.again-btn {
+    margin-top: 30px;
+}
+

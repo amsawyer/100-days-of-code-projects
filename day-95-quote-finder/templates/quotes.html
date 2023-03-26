@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+            <link rel="stylesheet" href="{{url_for('.static', filename='css/styles.css')}}">
+        {% endblock %}
+        <title>Quotes on {{ tag }}</title>
+        {% endblock %}
+    </head>
+    {% from 'bootstrap5/form.html' import render_form, render_hidden_errors, render_field %}
+
+    <body class="quotes-page-body">
+
+    {% block content %}
+    <div class="container">
+        {% for quote in quotes %}
+        <div class="row quote-row justify-content-center">
+            <div class="col-md-9">
+                <p><em>{{ quote["quote"] }}</em></p>
+                <span class="author"><p>- {{ quote["author"] }}</p></span>
+            </div>
+            <div class="col-md-3">
+                <img class="like-btn float-end" src="{{ url_for('static', filename='img/like.png') }}">
+                <img class="like-btn float-end" src="{{ url_for('static', filename='img/dislike.png') }}">
+            </div>
+        </div>
+        {% endfor %}
+        <div class="row quote-row button-row justify-content-center">
+            <div class="col-sm-4">
+                {% if offset > 5 %}
+                <a href="{{ url_for('prev_page', tag=tag, old_offset=offset) }}">
+                    <img class="arrow-btn float-start" src="{{ url_for('static', filename='img/left-arrow.png') }}">
+                </a>
+                {% endif %}
+            </div>
+            <div class="col-sm-4">
+                <a class="btn btn-primary home-btn mx-auto d-block" href="{{ url_for('home') }}" role="button">Return to Home</a>
+            </div>
+            <div class="col-sm-4">
+                <a href="{{ url_for('next_page', tag=tag, old_offset=offset) }}">
+                    <img class="arrow-btn float-end" src="{{ url_for('static', filename='img/right-arrow.png') }}">
+                </a>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
+    </body>
+</html>

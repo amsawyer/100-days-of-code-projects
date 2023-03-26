@@ -1,0 +1,52 @@
+/* Homepage */
+.homepage-body {
+    padding: 150px 50px 150px 50px;
+}
+
+.quote {
+    margin: 50px 0 0 0;
+}
+
+.author {
+    float: right;
+}
+
+.search-form {
+    margin: 50px 0 50px 0;
+}
+
+/* Site-wide */
+.blah {
+    background-color: #333;
+    color: white;
+}
+
+.like-btn {
+    max-width: 10%;
+    margin: 0 5px 0 5px;
+}
+
+/* Quotes page */
+.quotes-page-body {
+    padding: 100px 50px 100px 50px;
+}
+
+.quote-row {
+    margin: 10px 50px 20px 50px;
+}
+
+.arrow-btn {
+    max-width: 8%;
+}
+
+.home-btn {
+    text-align: center;
+}
+
+.right-arrow {
+    text-align: right;
+}
+
+.button-row {
+    margin-top: 50px;
+}

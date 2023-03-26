@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {% block head %}
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+            <link rel="stylesheet" href="{{url_for('.static', filename='css/styles.css')}}">
+        {% endblock %}
+
+        <title>Image Color Palette</title>
+        {% endblock %}
+    </head>
+    <body class="img-page-body">
+    {% block content %}
+       <img class="img-fluid mx-auto d-block uploaded-img" src="{{ url_for('static', filename=img_filename) }}">
+
+       <div class="text-center">
+         <div class="container">
+             <table class="table">
+                 <thead><tr>
+                    <th>Color</th>
+                    <th>Color RGB Code</th>
+                    <th>Color Hex Code</th>
+                 </tr></thead>
+
+                 <tbody>
+                 {% for color in colors %}
+                 <tr>
+                     <td class="color-cell" style="background: {{ color[1] }};min-width:100px"> </td>
+                     <td>{{ color[0][0], color[0][1], color[0][2] }}</td>
+                     <td>{{ color[1] }}</td>
+                 </tr>
+                 {% endfor %}
+                 </tbody>
+             </table>
+         </div>
+         <div class="row justify-content-center">
+              <div class="col-4">
+                  <a class="btn btn-success again-btn" href="{{ url_for('home') }}" role="button">Generate Another Color Palette</a>
+              </div>
+         </div>
+      </div>
+
+
+    {% endblock %}
+
+    {% block scripts %}
+        <!-- Optional JavaScript -->
+        {{ bootstrap.load_js() }}
+    {% endblock %}
+    </body>
+</html>
